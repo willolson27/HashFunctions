@@ -14,7 +14,24 @@ public class TicTacToeHashCode extends Board {
   @Override
     public int myHashCode() {
 
-      return 0;
+	  int[][] pows3 = new int [][] { {1, 3, 9}, {27, 81, 243}, {729, 2187, 6561}};
+	  
+	  char ch = ' ';
+	  int sum = 0;
+	  for (int r = 0; r < pows3.length; r++) {
+		for (int c = 0; c < pows3[r].length; c++) {
+			ch = super.charAt(r, c);
+	  		if (ch == 'x')
+	  			sum += pows3[r][c];
+	  		else if (ch == 'o')
+	  			sum += 2 * pows3[r][c];
+		}
+	  }
+	  
+      return sum;
+		
+			  
+	
    }
    
     public boolean isWin(String s) {
@@ -26,13 +43,15 @@ public class TicTacToeHashCode extends Board {
       TicTacToeHashCode board = new TicTacToeHashCode ("Tic Tac Toe");
       while (true) {
       
-         String currentBoard = board.boardValues[(int)(Math.random()* board.boardValues.length)];
-         board.show(currentBoard);
-         board.setHashCode(board.myHashCode());
+       //TODO this line no longer works
+       //  String currentBoard = board.boardValues[(int)(Math.random()* board.boardValues.length)];
+         
+         board.displayRandomString();
+         board.setHashCodeLabel(board.myHashCode());
          // TODO Update this line to call your isWin method.
          board.setWinner(TicTacToe.isWin(currentBoard));
          
          Thread.sleep(4000);      
       }
    }
-}
+ }  
