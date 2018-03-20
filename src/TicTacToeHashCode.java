@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 //TODO Make sure you remove all of the TODO comments from this file before turning itin
 
 public class TicTacToeHashCode extends Board {
@@ -7,6 +12,30 @@ public class TicTacToeHashCode extends Board {
   TicTacToeHashCode(String s) {
    super(s);
   // TODO Instantiate/fill winners array.  
+   BufferedReader inputFile = null;
+   
+   try {
+   	inputFile = new BufferedReader(new FileReader("TicTacToeWinners.txt"), 1024);
+   }
+   catch (FileNotFoundException e) {
+   	System.out.println(ERROR);
+   	System.exit(0);
+   }
+ 
+   boolean[] winners = new boolean[19683];
+   String line;
+   int index = 0;
+   try {
+	while ((line = inputFile.readLine()) != null)
+	   {
+	     index = 23;
+	     winners[index] = true;
+	   }
+   } catch (IOException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+   }
+   
   }
   
   // TODO - write the myHashCode function.  It must create a unique hashcode for all of the 
@@ -41,17 +70,22 @@ public class TicTacToeHashCode extends Board {
   
    public static void main(String[] args) throws InterruptedException {
       TicTacToeHashCode board = new TicTacToeHashCode ("Tic Tac Toe");
-      while (true) {
+     
+
+	   
+	    
+      
+     /* while (true) {
       
        //TODO this line no longer works
        //  String currentBoard = board.boardValues[(int)(Math.random()* board.boardValues.length)];
          
          board.displayRandomString();
-         board.setHashCodeLabel(board.myHashCode());
+         board.setHashCode(board.myHashCode());
          // TODO Update this line to call your isWin method.
          board.setWinner(TicTacToe.isWin(currentBoard));
          
          Thread.sleep(4000);      
-      }
+      } */
    }
  }  
