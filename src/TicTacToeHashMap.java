@@ -9,7 +9,7 @@ public class TicTacToeHashMap  {
    
    }
 
-// TODO This method uses reflect to investigae the objects inside the HashMap
+// TODO This method uses reflect to investigate the objects inside the HashMap
 // You should be able to update this with your information and determine 
 // Information about capacity (different than size()) and what is stored in the cells
 
@@ -33,7 +33,7 @@ public class TicTacToeHashMap  {
 
   // TODO read in and store the strings in your hashmap, then close the file
   
-  // TODO print out the capacity using the capcity() method
+  // TODO print out the capacity using the capacity() method
   // TODO print out the other analytical statistics as required in the assignment
   
    }
