@@ -138,6 +138,8 @@ public class TicTacToeHashCode extends Board {
 			while ((line = inputFile.readLine()) != null)
 			   {
 				board.setBoardString(line);
+				board.setWinnerLabel(board.isWin());
+				board.setHashCodeLabel(board.myHashCode());
 				System.out.println(board.getBoardString() + " " + board.myHashCode() + " " + board.isWin());
 				Thread.sleep(4000);
 			   }
