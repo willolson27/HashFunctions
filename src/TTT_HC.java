@@ -13,7 +13,7 @@ public class TTT_HC extends Board{
 	//FIELDS
 	private final static String mainInput = "TicTacToeWinners.txt";
 	private ArrayList<TTT>[] winners;
-	private final int size = 10000;
+	private final int size = 1000;
 	private final static String testInput = "TTT_Tests.txt";
 	private final static String secondInput = "ALLTTT.txt";
 	private final String ARR_SIZE = "Array Size: ";
@@ -80,7 +80,7 @@ public class TTT_HC extends Board{
 			if (s.charAt(i) == 'x')
 				sum += Math.pow(2, i);
 			else if (s.charAt(i) == 'o')
-				sum += Math.pow(3, i);
+				sum += i * 3;
 			else
 				sum += 0;	
 		}
@@ -101,10 +101,12 @@ public class TTT_HC extends Board{
 			if (s.charAt(i) == 'x')
 				sum += Math.pow(2, i);
 			else if (s.charAt(i) == 'o')
-				sum += Math.pow(3, i);
+				sum += i * 3;
 			else
 				sum += 0;	
 		}
+		
+		
 		
 		ArrayList<TTT> temp = winners[sum];
 		boolean win = false;
@@ -146,8 +148,8 @@ public class TTT_HC extends Board{
 		ArrayList<Double> chains = new ArrayList<Double>();
 		int maxChain = 0;
 		double avgChain = 0;
-		int numBuckets = 0;
-		int numItems = 0;
+		double numBuckets = 0;
+		double numItems = 0;
 		
 		for (int i = 0; i < this.winners.length; i++) {
 			if (winners[i] != null)
@@ -189,9 +191,9 @@ public class TTT_HC extends Board{
 		
 		TTT_HC board = new TTT_HC("Tic Tac Toe");
 		BufferedReader inputFile = null;
-		   
+
 	   try {
-	   	inputFile = new BufferedReader(new FileReader(testInput), 1024);
+	   	inputFile = new BufferedReader(new FileReader(mainInput), 1024);
 	   }
 	  catch (FileNotFoundException e) {
 	   	System.out.println(ERROR);
@@ -208,7 +210,7 @@ public class TTT_HC extends Board{
 			board.setWinnerLabel(board.isWin());
 			board.setHashCodeLabel(board.myHashCode());
 	//		System.out.println(board.tttHashCode());
-	//		System.out.println(board.getBoardString() + " " + board.tttHashCode() + " " + w);
+			System.out.println(board.getBoardString() + " " + board.tttHashCode() + " " + w);
 		//	Thread.sleep(4000);
 		   }
 	   } catch (IOException e) {

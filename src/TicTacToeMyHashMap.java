@@ -6,17 +6,17 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TicTacToeHashMap  {
+public class TicTacToeMyHashMap  {
 	
 	
 	private static final String ERROR = "Error File not Found";
-	private Map<Integer, TTT[]> tttMap;
+	private Map<Integer, TTT> tttMap;
 	private final static String testInput = "TTT_Tests.txt";
 
 // TODO Define a hash map to store the winning strings as Key and true as Value
 
-   TicTacToeHashMap() {
-	   tttMap = new HashMap<Integer, TTT[]>();
+   TicTacToeMyHashMap() {
+	   tttMap = new HashMap<Integer, TTT>();
    }
 
 // TODO This method uses reflect to investigate the objects inside the HashMap
@@ -39,7 +39,7 @@ public class TicTacToeHashMap  {
                                               NoSuchFieldException, 
                                               IllegalAccessException {
 
-      TicTacToeHashMap m = new TicTacToeHashMap();
+      TicTacToeMyHashMap m = new TicTacToeMyHashMap();
   
   // TODO read in and store the strings in your hashmap, then close the file
       BufferedReader inputFile = null;
@@ -59,8 +59,6 @@ public class TicTacToeHashMap  {
 		while ((line = inputFile.readLine()) != null)
 		   {
 			hash = line.hashCode();
-			if (m.tttMap.get(hash) != null) {
-				
 			m.tttMap.put(hash, new TTT(line,false));
 		   }
 	   } catch (IOException e) {
