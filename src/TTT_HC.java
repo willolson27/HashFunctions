@@ -61,6 +61,11 @@ public class TTT_HC extends Board{
 		   } 
 
 	}
+	
+	/**
+	 * returns a hash code for this board, required because this class extends Board.java
+	 * @return Hash Code for this TTT_HC taken from the tttHashCode method
+	 */
 	@Override
 	public int myHashCode() {
 		return tttHashCode();
@@ -187,6 +192,12 @@ public class TTT_HC extends Board{
 		
 	}
 	
+	/**
+	 * test this method by creating a hash table from the winners file and checking this indexes
+	 * from another test file
+	 * @param args class fiel agruments
+	 * @throws InterruptedException
+	 */
 	public static void main (String[] args) throws InterruptedException {
 		
 		TTT_HC board = new TTT_HC("Tic Tac Toe");
