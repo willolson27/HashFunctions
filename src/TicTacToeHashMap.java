@@ -1,12 +1,22 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TicTacToeHashMap  {
+	
+	
+	private static final String ERROR = "Error File not Found";
+	private Map<Integer, TTT> tttMap;
+	private final static String testInput = "TTT_Tests.txt";
 
 // TODO Define a hash map to store the winning strings as Key and true as Value
 
    TicTacToeHashMap() {
-   // TODO Instantiate/fill your HashMap ... pay attention to initial capacity and load values
-   
+	   tttMap = new HashMap<Integer, TTT>();
    }
 
 // TODO This method uses reflect to investigate the objects inside the HashMap
@@ -16,7 +26,7 @@ public class TicTacToeHashMap  {
    private int capacity() throws NoSuchFieldException, IllegalAccessException {
       Field tableField = HashMap.class.getDeclaredField("table");
       tableField.setAccessible(true);
-      Object[] table = (Object[]) tableField.get(##YOUR HASH MAP HERE ##);
+      Object[] table = (Object[]) tableField.get(tttMap);
       return table == null ? 0 : table.length;   
    }
    
@@ -30,10 +40,33 @@ public class TicTacToeHashMap  {
                                               IllegalAccessException {
 
       TicTacToeHashMap m = new TicTacToeHashMap();
-
-  // TODO read in and store the strings in your hashmap, then close the file
   
+  // TODO read in and store the strings in your hashmap, then close the file
+      BufferedReader inputFile = null;
+	   
+	   try {
+	   	inputFile = new BufferedReader(new FileReader(testInput), 1024);
+	   }
+	  catch (FileNotFoundException e) {
+	   	System.out.println(ERROR);
+	   	System.exit(0);
+	   }
+		   
+	   String line = "";
+	   int hash = 0;
+
+	   try {
+		while ((line = inputFile.readLine()) != null)
+		   {
+			hash = line.hashCode();
+			m.tttMap.put(hash, new TTT(line,false));
+		   }
+	   } catch (IOException e) {
+		e.printStackTrace();
+	   }  	
   // TODO print out the capacity using the capacity() method
+      
+      System.out.println(m.capacity());
   // TODO print out the other analytical statistics as required in the assignment
   
    }

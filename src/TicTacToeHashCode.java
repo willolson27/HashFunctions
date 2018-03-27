@@ -2,19 +2,31 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+/**
+ * 
+ * @author will olson  (git: willolson27)
+ * Assignment 7
+ * Due MArch 27, 2018
+ *
+ */
 
-//TODO Make sure you remove all of the TODO comments from this file before turning itin
+//this one is done
 
 public class TicTacToeHashCode extends Board {
 
+//FIELDs
  boolean [] winners;  // True if the hash string that maps to this index is a winner, false otherwise
  final int size = 19683;   
  private final String mainInput = "TicTacToeWinners.txt";
  private final static String testInput = "TTT_Tests.txt";
  
+  /**
+   * Create a hash table of tic tac toe based on winner values taken from given file
+   * @param s name of file to be read from
+   */
   TicTacToeHashCode(String s) {
    super(s);
-  // TODO Instantiate/fill winners array.  
+   
    BufferedReader inputFile = null;
    
    try {
@@ -24,25 +36,17 @@ public class TicTacToeHashCode extends Board {
    	System.out.println(ERROR);
    	System.exit(0);
    }
- 
-   String[] testArr = new String[442];
-   int[] testInts = new int[442];
+
    winners = new boolean[size];
    String line = "";
    int index = 0;
-   int testIX = 0;
+
    try {
 	while ((line = inputFile.readLine()) != null)
 	   {
-		 testArr[testIX] = line;
-		 
 		 this.setBoardString(line);
 	     index = myHashCode();
-	     testInts[testIX] = index;
-	 //    System.out.println(index);
 	     winners[index] = true;
-	//     break;
-	     testIX++;
 	   }
    } catch (IOException e) {
 	// TODO Auto-generated catch block
@@ -52,15 +56,12 @@ public class TicTacToeHashCode extends Board {
 		if (winners[i] != true) {
 			winners[i] = false; 
 		}
-//   System.out.println("br");
-   for (int i = 0; i < winners.length; i++) {
-	//   System.out.println(testArr[i] + " " + testInts[i] + " " + isWin(testArr[i]));
-	//   System.out.println(winners[i] + " " + i  );
-   }		   
   }
   
-  // TODO - write the myHashCode function.  It must create a unique hashcode for all of the 
-  //   possible values the game board (3 ^ 9) and it MUST use the super.charAt(row, col) function
+  /**
+   * creates a hash code index for this instance of the board
+   * @return hash code index for this instance of TTT board
+   */
   @Override
     public int myHashCode() {
 
@@ -82,13 +83,16 @@ public class TicTacToeHashCode extends Board {
 		}
 		
 	  }
-//	  System.out.println(sum);
+	  
       return sum;
-		
 			  
-	
    }
-   
+  
+   /**
+    * checks if the given string is a winning tic tac toe game
+    * @param s String reprsentation of board to be checked
+    * @return boolean - true if is win false if loss or invalid
+    */
     public boolean isWin(String s) {
   
       int[][] pows3 = new int [][] { {1, 3, 9}, {27, 81, 243}, {729, 2187, 6561}};
@@ -114,11 +118,20 @@ public class TicTacToeHashCode extends Board {
     	
     }
     
+    /**
+     * checks if this instance of the board is a winning tic tac toe game
+     * @return boolean - true if is win false if loss or invalid
+     */
     @Override
     boolean isWin() {
     	return(winners[myHashCode()]);
     }
   
+    /**
+     * test this class by reading in a test file and checking if the winners are in the correct index
+     * @param args - class args
+     * @throws InterruptedException
+     */
     public static void main(String[] args) throws InterruptedException {
 		TicTacToeHashCode board = new TicTacToeHashCode("Tic Tac Toe");
 		
@@ -141,7 +154,7 @@ public class TicTacToeHashCode extends Board {
 				board.setWinnerLabel(board.isWin());
 				board.setHashCodeLabel(board.myHashCode());
 				System.out.println(board.getBoardString() + " " + board.myHashCode() + " " + board.isWin());
-				Thread.sleep(4000);
+				Thread.sleep(2000);
 			   }
 		   } catch (IOException e) {
 			e.printStackTrace();

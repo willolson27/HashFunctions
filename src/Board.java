@@ -17,19 +17,35 @@ abstract class Board extends JFrame implements ActionListener {
 
 	private String boardString = "";
 
+	/**
+	 * creates a new board object with the given string input
+	 * @param title
+	 */
 	public Board(String title) {
 		super(title);
 		setupFrame();
 	}
 
+	/**
+	 * sets the HashCode label to the given hashcode
+	 * @param hashcode - int value assigned to the board string in a hash map
+	 */
 	public void setHashCodeLabel(int hashcode) {
 		lblHashCode.setText("" + hashcode);
 	}
 
+	/**
+	 * sets the winner label to winner or loser based on given string
+	 * @param result - string representation of win or loss
+	 */
 	public void setWinnerLabel(String result) {
 		lblWinTitle.setText(result);
 	}
 
+	/**
+	 * sets the winner label to winner or loser based on given boolean
+	 * @param result = boolean representation of win or loss (win = true loss = false)
+	 */
 	public void setWinnerLabel(boolean result) {
 		if (result)
 			setWinnerLabel("Winner");
@@ -42,6 +58,10 @@ abstract class Board extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 	}
 
+	/**
+	 * sets up the outer panel of the board
+	 * @return - JPanel that represents the outer panel of the board
+	 */
 	JPanel setupPanelOne() {
 		JPanel panel = new JPanel();
 		JLabel lblHCTitle = new JLabel("Hash Code");
@@ -56,6 +76,10 @@ abstract class Board extends JFrame implements ActionListener {
 		return panel;
 	}
 
+	/**
+	 * sets up the inner panel (button panel) of the board
+	 * @return - JPanel representation of the Tic Tac Toe button panel
+	 */
 	private JPanel setupPanelTwo() {
 		JButton b;
 		JPanel panel = new JPanel();
@@ -88,6 +112,11 @@ abstract class Board extends JFrame implements ActionListener {
 		return panel;
 	}
 
+	/**
+	 * cycles a given char value ('x', 'o', or ' ') to the next value to the right
+	 * @param ch char to be cycled to next
+	 * @return 
+	 */
 	private static char cycleValue(char ch) {
 		switch (ch) {
 		case 'x':
@@ -99,6 +128,9 @@ abstract class Board extends JFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 * sets up the main frame of the board and adds the two panels to it
+	 */
 	private void setupFrame() {
 		JPanel panel2 = new JPanel();
 
@@ -116,6 +148,10 @@ abstract class Board extends JFrame implements ActionListener {
 		super.setVisible(true);
 	}
 
+	/**
+	 * gives a random char value between ('x' 'o' and ' ')
+	 * @return randomized char value from the three tic tac toe possibliites
+	 */
 	private char randomXO() {
 		int rnd = (int) (Math.random() * TicTacToe.CHAR_POSSIBILITIES);
 		switch (rnd) {

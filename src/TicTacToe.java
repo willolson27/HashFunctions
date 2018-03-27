@@ -1,11 +1,19 @@
 import java.util.Arrays;
 
 public class TicTacToe {
+	
+  //FIELDS
   public final static int ROWS = 3;
   public final static int COLS = 3;
   public final static int POSSIBILITIES = (int) Math.pow(3,9);
   public final static int CHAR_POSSIBILITIES = 3; // x, o or space
   
+  /**
+   * returns the number of characters in a 2D array that are equal to a given char
+   * @param b array to be looked through
+   * @param ch char to be checked for
+   * @return number of times ch occurs in b
+   */
   private static int numChars(char[][] b, char ch) {
   int total = 0;
     for (int r = 0; r < ROWS; r++)
@@ -15,6 +23,12 @@ public class TicTacToe {
     return total;
   }
   
+  /**
+   * checks that the TTT string is valid - at least 3 xs and 2 os, or 3 os and 2 xs,
+   * at least one more x or one more o
+   * @param board - board to be looked through
+   * @return - boolean for whether or not the board is valid (true if so false if not)
+   */
   public static boolean valid(char[][] board) {
   
   // Ensure there are at least 3 xs and 2 os, or 3 os and 2 xs
@@ -26,6 +40,11 @@ public class TicTacToe {
     return false;
   }
   
+  /**
+   * converts a 2d char array (a board) to its string representation
+   * @param b board to be converted
+   * @return string reprsentation of given board
+   */
    public static String boardToString(char[][] b) {
      String result = "";
      for (int r = 0; r < ROWS; r++) {
