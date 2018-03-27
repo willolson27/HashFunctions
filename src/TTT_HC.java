@@ -155,12 +155,16 @@ public class TTT_HC extends Board{
 		double avgChain = 0;
 		double numBuckets = 0;
 		double numItems = 0;
+		int[] tenths = new int[10];
+		int[] fourths = new int[4];
 		
-		for (int i = 0; i < this.winners.length; i++) {
+		int l = this.winners.length;
+		for (int i = 0; i < l; i++) {
 			if (winners[i] != null)
 				if (winners[i].size() == 1) {
 					numBuckets++;
 					numItems++; 
+					fourths[i / 250]++;
 				}
 				else {
 					chains.add((double) winners[i].size());
@@ -169,6 +173,8 @@ public class TTT_HC extends Board{
 					numItems += winners[i].size();
 					numBuckets++;
 					numCollisions += (winners[i].size() - 1);
+					tenths[i / 100] += (winners[i].size() - 1);
+					fourths[i /250]++;
 				}	
 			
 		}
@@ -185,6 +191,15 @@ public class TTT_HC extends Board{
 		toReturn += AVG_CHAIN + avgChain + "\n";
 		toReturn += MAX_CHAIN + maxChain + "\n";
 		
+	
+		for (int i = 0; i < tenths.length; i++)
+			toReturn += (i + 1) + " " + tenths[i] + "\n";
+		for (int i = 0; i < fourths.length; i++)
+			toReturn += (i + 1) + " " + fourths[i] + "\n";		
+				
+			
+							
+		
 		
 		
 		return toReturn;
@@ -195,7 +210,7 @@ public class TTT_HC extends Board{
 	/**
 	 * test this method by creating a hash table from the winners file and checking this indexes
 	 * from another test file
-	 * @param args class fiel agruments
+	 * @param args class file arguments
 	 * @throws InterruptedException
 	 */
 	public static void main (String[] args) throws InterruptedException {
