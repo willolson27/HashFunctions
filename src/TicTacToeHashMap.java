@@ -10,13 +10,13 @@ public class TicTacToeHashMap  {
 	
 	
 	private static final String ERROR = "Error File not Found";
-	private Map<Integer, TTT[]> tttMap;
+	private Map<String, Boolean> tttMap;
 	private final static String testInput = "TTT_Tests.txt";
 
 // TODO Define a hash map to store the winning strings as Key and true as Value
 
    TicTacToeHashMap() {
-	   tttMap = new HashMap<Integer, TTT[]>();
+	   tttMap = new HashMap<String, Boolean>();
    }
 
 // TODO This method uses reflect to investigate the objects inside the HashMap
@@ -55,13 +55,13 @@ public class TicTacToeHashMap  {
 	   String line = "";
 	   int hash = 0;
 
+	   
 	   try {
 		while ((line = inputFile.readLine()) != null)
 		   {
 			hash = line.hashCode();
-			if (m.tttMap.get(hash) != null) {
-				
-			m.tttMap.put(hash, new TTT(line,false));
+			if (m.tttMap.get(hash) != null) 
+				m.tttMap.put(line, new TTT(line,false));
 		   }
 	   } catch (IOException e) {
 		e.printStackTrace();

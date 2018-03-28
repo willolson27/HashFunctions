@@ -13,7 +13,7 @@ public class TTT_HC extends Board{
 	//FIELDS
 	private final static String mainInput = "TicTacToeWinners.txt";
 	private ArrayList<TTT>[] winners;
-	private final int size = 1000;
+	private final int size = 520;
 	private final static String testInput = "TTT_Tests.txt";
 	private final static String secondInput = "ALLTTT.txt";
 	private final String ARR_SIZE = "Array Size: ";
@@ -164,7 +164,7 @@ public class TTT_HC extends Board{
 				if (winners[i].size() == 1) {
 					numBuckets++;
 					numItems++; 
-					fourths[i / 250]++;
+					fourths[i / (l / 4)]++;
 				}
 				else {
 					chains.add((double) winners[i].size());
@@ -173,8 +173,8 @@ public class TTT_HC extends Board{
 					numItems += winners[i].size();
 					numBuckets++;
 					numCollisions += (winners[i].size() - 1);
-					tenths[i / 100] += (winners[i].size() - 1);
-					fourths[i /250]++;
+					tenths[i / (l / 10)] += (winners[i].size() - 1);
+					fourths[i /(l / 4)]++;
 				}	
 			
 		}
@@ -236,7 +236,7 @@ public class TTT_HC extends Board{
 			board.setWinnerLabel(board.isWin());
 			board.setHashCodeLabel(board.myHashCode());
 	//		System.out.println(board.tttHashCode());
-			System.out.println(board.getBoardString() + " " + board.tttHashCode() + " " + w);
+	//		System.out.println(board.getBoardString() + " " + board.tttHashCode() + " " + w);
 		//	Thread.sleep(4000);
 		   }
 	   } catch (IOException e) {

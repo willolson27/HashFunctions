@@ -90,7 +90,7 @@ public class TicTacToeHashCode extends Board {
   
    /**
     * checks if the given string is a winning tic tac toe game
-    * @param s String reprsentation of board to be checked
+    * @param s String representation of board to be checked
     * @return boolean - true if is win false if loss or invalid
     */
     public boolean isWin(String s) {
@@ -135,9 +135,7 @@ public class TicTacToeHashCode extends Board {
     public static void main(String[] args) throws InterruptedException {
 		TicTacToeHashCode board = new TicTacToeHashCode("Tic Tac Toe");
 		
-		BufferedReader inputFile = null;
-		   
-		   try {
+		BufferedReader inputFile = null;+	   try {
 		   	inputFile = new BufferedReader(new FileReader(testInput), 1024);
 		   }
 		   catch (FileNotFoundException e) {

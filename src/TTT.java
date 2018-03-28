@@ -17,4 +17,9 @@ public class TTT {
 		return isWin;
 	}
 	
+	@Override
+	public int hashCode() {
+		return -1;
+	}
+	
 }
