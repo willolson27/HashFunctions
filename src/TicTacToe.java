@@ -1,5 +1,11 @@
 import java.util.Arrays;
-
+/**
+ * 
+ * @author will olson (git: willolson27)
+ *Assignment 7
+ *Due March 31, 2018
+ *
+ */
 public class TicTacToe {
 	
   //FIELDS
@@ -31,8 +37,6 @@ public class TicTacToe {
    */
   public static boolean valid(char[][] board) {
   
-  // Ensure there are at least 3 xs and 2 os, or 3 os and 2 xs
-  // Make sure there are at least one more x or one more o
     int numX = numChars(board, 'x');
     int numO = numChars(board, 'o');
     if (! (numX > 2 || numO > 2)) return false;
@@ -54,8 +58,13 @@ public class TicTacToe {
        }
      return result;
    }
-   
-      public static char[][] stringToBoard(String board) {
+ 
+   	/**
+   	 * converts a given board string to a char array that represents the board
+   	 * @param board board string to be converted
+   	 * @return char array that represents the boar
+   	 */
+    public static char[][] stringToBoard(String board) {
       char[][] b = new char[ROWS][COLS];
      int index = 0;
      for (int r = 0; r < ROWS; r++) {
@@ -65,7 +74,11 @@ public class TicTacToe {
      return b;
    }
 
-   
+   /**
+    * Checks which letter the given input char corresponds to
+    * @param ch char to be checked (should be a  number)
+    * @return letter that ch corresponds to
+    */
    public static char whichLetter(char ch) {
       switch (ch) {
          case '1' : return 'x';
@@ -75,6 +88,11 @@ public class TicTacToe {
        }
    }
      
+   /** 
+    * creates a board from a board string with numbers
+    * @param s number string to be converted
+    * @return board representation of the given string
+    */
    public static char[][] makeBoard(String s) {
    char[][] b = new char[ROWS][COLS];
    int ch = 0;
@@ -86,9 +104,14 @@ public class TicTacToe {
    return b;
    }
    
+   	/**
+   	 * s is a 9 character string, composed of 0s, 1s, and 2s.  Add 1 to the last char, adjusting
+     * all the rest of the characters as necessary.
+   	 * @param s - String to be added to
+   	 * @return adjusted String
+   	 */
       private static String addOne(String s) {
-   // s is a 9 character string, composed of 0s, 1s, and 2s.  Add 1 to the last char, adjusting
-   // all the rest of the characters as necessary.
+    	  
       boolean carry = false;
       char ch[] = s.toCharArray();
       ch[ch.length-1] =  (char)((int)(ch[ch.length-1])+1);
@@ -104,6 +127,10 @@ public class TicTacToe {
       return new String(ch);
    }
    
+   /**
+    * fills the board with random? values
+    * @return a board filled by the method
+    */
    public static String[] fillValues() {
       String strBoard = "000000000";
       String[] values = new String[POSSIBILITIES];
@@ -116,6 +143,11 @@ public class TicTacToe {
       return values;
    }
    
+   /**
+    * checks if there is a win diagonally along the board
+    * @param board 2d char array that represents the board
+    * @return boolean - true if win, false if not
+    */
    private static boolean diagonalWin(char[][] board) {
    
      if ((board[0][0] == 'x' && board[1][1] == 'x' && board[2][2] == 'x') || 
@@ -130,6 +162,11 @@ public class TicTacToe {
      return false;
    }
    
+   /**
+    * checks if there is a win across the rows of the board
+    * @param board 2d char array that represents the board
+    * @return boolean - true if win, false if not
+    */
    private static boolean rowWin(char[][] board) {
       char ch;
       for (int r = 0; r < ROWS; r++) {
@@ -139,6 +176,12 @@ public class TicTacToe {
         } 
         return true;
       } 
+   
+   /**
+    * checks if there is a win across the columns of the board the board
+    * @param board 2d char array that represents the board
+    * @return boolean - true if win, false if not
+    */
    private static boolean colWin(char[][] board) {
       char ch;
       for (int c = 0; c < COLS; c++) {
@@ -149,10 +192,20 @@ public class TicTacToe {
         return true;
       } 
 
+   /**
+    * checks if there is a win diagonally, horizontally, or vertical along the board
+    * @param board 2d char array that represents the board
+    * @return boolean - true if win, false if not
+    */
    public static boolean isWin(char[][]b) {
      return valid(b) && (rowWin(b) || colWin(b) || diagonalWin(b));
      }
      
+   /**
+    * checks if there is a win in the given board string
+    * @param s string that represents a board
+    * @return boolean - true if win, false if not
+    */
    public static boolean isWin(String s) {
      char[][] b = stringToBoard(s);
      return isWin(b);

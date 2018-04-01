@@ -2,11 +2,12 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 /**
  * 
  * @author will olson  (git: willolson27)
  * Assignment 7
- * Due MArch 27, 2018
+ * Due March 31, 2018
  *
  */
 
@@ -17,8 +18,18 @@ public class TicTacToeHashCode extends Board {
 //FIELDs
  boolean [] winners;  // True if the hash string that maps to this index is a winner, false otherwise
  final int size = 19683;   
+ private ArrayList<Integer> used = new ArrayList<Integer>();
+ private int numCollisions = 0;
  private final String mainInput = "TicTacToeWinners.txt";
  private final static String testInput = "TTT_Tests.txt";
+ private final String ARR_SIZE = "Array Size: ";
+ private final String LOAD_F = "Load Factor: ";
+ private final String COLLISION = "No. of Collisions: ";
+ private final String AVG_CHAIN = "Average Chain Length: ";
+ private final String MAX_CHAIN = "Max Chain Length: ";
+ private final String NO_CHAINS = "Number of Chains: ";
+ private final String TENTH = "Tenth: ";
+ private final String QTR = "Quarter: "; 
  
   /**
    * Create a hash table of tic tac toe based on winner values taken from given file
@@ -40,12 +51,16 @@ public class TicTacToeHashCode extends Board {
    winners = new boolean[size];
    String line = "";
    int index = 0;
+   int temp;
 
    try {
 	while ((line = inputFile.readLine()) != null)
 	   {
 		 this.setBoardString(line);
 	     index = myHashCode();
+	     temp = index + 0;
+	     if (used.contains(temp))
+	    	 numCollisions++;
 	     winners[index] = true;
 	   }
    } catch (IOException e) {
@@ -100,7 +115,7 @@ public class TicTacToeHashCode extends Board {
   	  char ch = super.charAt(s, 0, 0);
   	  int sum = 0;
 
-  	 
+  	 //Algorithm given in class
   	  for (int r = 0; r < pows3.length; r++) {
   		for (int c = 0; c < pows3[r].length; c++) {
   			ch = super.charAt(s, r, c);
@@ -126,6 +141,64 @@ public class TicTacToeHashCode extends Board {
     boolean isWin() {
     	return(winners[myHashCode()]);
     }
+    
+    /**
+	 * print data on this instance of TicTacToeHashCode - number of collisions, number of chains etc
+	 * @return -String representation of data on this class
+	 */
+	public String printResults() { 
+		
+		//create locals
+		String toReturn = "";
+		ArrayList<Double> chains = new ArrayList<Double>();
+		int maxChain = 0;
+		double avgChain = 0;
+		double numBuckets = 0;
+		double numItems = 0;
+		int[] tenths = new int[10];
+		int[] fourths = new int[4];
+		String[] nums = {"First", "Second", "Third", "Fourth", "Fifth", 
+						"Sixth", "Seventh", "Eighth", "Ninth", "Tenth"};
+		
+		//get num buckets
+		int l = this.winners.length;
+		for (int i = 0; i < l; i++) {
+			numBuckets++;
+			numItems++; 
+			if (i < l - 3)
+				fourths[i / (l / 4)]++;
+			else
+				fourths[3]++;
+		}
+		
+		numBuckets -= numCollisions;
+		
+		int sum = 0;
+		for (double i : chains)
+			sum += i;
+		if (chains.size() != 0)
+			avgChain = (sum / chains.size());
+		
+		//print
+		toReturn += ARR_SIZE + this.winners.length + "\n";
+		toReturn += LOAD_F + (numItems / numBuckets) + "\n";
+		toReturn += COLLISION + numCollisions + "\n";
+		toReturn += NO_CHAINS + chains.size() + "\n";
+		toReturn += AVG_CHAIN + avgChain + "\n";
+		toReturn += MAX_CHAIN + maxChain + "\n";
+		
+	//distribution
+		for (int i = 0; i < tenths.length; i++)
+			toReturn += nums[i] +  " " + TENTH + tenths[i] + "\n";
+		for (int i = 0; i < fourths.length; i++)
+			toReturn += nums[i] + " " + QTR + fourths[i] + "\n";		
+				
+		
+		return toReturn;
+		
+		
+	}
+	
   
     /**
      * test this class by reading in a test file and checking if the winners are in the correct index
@@ -133,9 +206,15 @@ public class TicTacToeHashCode extends Board {
      * @throws InterruptedException
      */
     public static void main(String[] args) throws InterruptedException {
-		TicTacToeHashCode board = new TicTacToeHashCode("Tic Tac Toe");
 		
-		BufferedReader inputFile = null;+	   try {
+    	//create a new board
+    	TicTacToeHashCode board = new TicTacToeHashCode("Tic Tac Toe");
+		
+		BufferedReader inputFile = null;
+		
+		
+		//read in the test file and compare the values to the winners to see if they are wins
+		try {
 		   	inputFile = new BufferedReader(new FileReader(testInput), 1024);
 		   }
 		   catch (FileNotFoundException e) {
@@ -152,17 +231,14 @@ public class TicTacToeHashCode extends Board {
 				board.setWinnerLabel(board.isWin());
 				board.setHashCodeLabel(board.myHashCode());
 				System.out.println(board.getBoardString() + " " + board.myHashCode() + " " + board.isWin());
-				Thread.sleep(2000);
+		//		Thread.sleep(2000);
 			   }
 		   } catch (IOException e) {
 			e.printStackTrace();
 		   }  
-		/*
-		 while (true) {
-		   board.displayRandomString();
-		   Thread.sleep(4000);
-		 }
-		 */
+		
+		   //print out the analysis for this instance
+		   System.out.println(board.printResults());
 	}
 }
 

@@ -8,13 +8,18 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/**
+ * 
+ * @author will olson (git : willolson27)
+ * Assignment 7
+ * Due March 31, 2018
+ */
 abstract class Board extends JFrame implements ActionListener {
 
+	//fields
 	private JButton buttons[][];
 	private JLabel lblHashCode;
 	private JLabel lblWinTitle;
-
 	private String boardString = "";
 
 	/**
@@ -150,7 +155,7 @@ abstract class Board extends JFrame implements ActionListener {
 
 	/**
 	 * gives a random char value between ('x' 'o' and ' ')
-	 * @return randomized char value from the three tic tac toe possibliites
+	 * @return randomized char value from the three Tic-Tac-Toe possibliites
 	 */
 	private char randomXO() {
 		int rnd = (int) (Math.random() * TicTacToe.CHAR_POSSIBILITIES);
@@ -164,12 +169,22 @@ abstract class Board extends JFrame implements ActionListener {
 		}
 	}
 
+	/**
+     * creates a hash code index for this instance of the board
+	 * @return hash code index for this instance of TTT board
+	 */
 	abstract int myHashCode();
 
 	abstract boolean isWin(String s);
 
 	abstract boolean isWin();
 
+	/**
+	 * Returns the char at the given coordinates from this board
+	 * @param row row coordinate for the requested char value
+	 * @param col column coordinate for the requested char value
+	 * @return char value requested at the given coordinated
+	 */
 	public char charAt(int row, int col) {
 		String value = buttons[row][col].getText();
 		if (value.length() > 0)
@@ -178,6 +193,12 @@ abstract class Board extends JFrame implements ActionListener {
 			return '*';
 	}
    
+	/**
+	 * Returns the char at the given coordinates from a given string
+	 * @param row row coordinate for the requested char value
+	 * @param col column coordinate for the requested char value
+	 * @return char value requested at the given coordinated
+	 */
    public char charAt(String s, int row, int col) {
      int pos = row * TicTacToe.COLS + col;
      if (s.length() >= pos)
@@ -186,6 +207,10 @@ abstract class Board extends JFrame implements ActionListener {
        return '*';   
    }
 
+   /**
+    * sets the board display to a given string
+    * @param s string to set the board display to
+    */
 	public void show(String s) {
 		int pos = 0;
 		String letter;
@@ -210,6 +235,9 @@ abstract class Board extends JFrame implements ActionListener {
 			}
 	}
 
+	/**
+	 * resets the tic tac toe board to its empty state (nothing in any buttons)
+	 */
 	public void resetBoardString() {
    boardString = "";
 		for (int r = 0; r < TicTacToe.ROWS; r++)
@@ -218,15 +246,26 @@ abstract class Board extends JFrame implements ActionListener {
 			}
 	}
 
+	/**
+	 * sets the board string of this tic tac toe board to a given string
+	 * @param s String to set the tic tac toe board to
+	 */
 	public void setBoardString(String s) {
 		boardString = s;
 		show(s);
 	}
 
+	/**
+	 * retrieves the board string for this tic tac toe board
+	 * @return String representation of this tic tac toe board
+	 */
 	public String getBoardString() {
 		return boardString;
 	}
 
+	/**
+	 * sets the board instance to display a random tictactoe string
+	 */
 	public void displayRandomString() {
 		for (int r = 0; r < TicTacToe.ROWS; r++)
 			for (int c = 0; c < TicTacToe.COLS; c++) {
