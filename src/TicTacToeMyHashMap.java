@@ -164,8 +164,7 @@ public class TicTacToeMyHashMap  {
       tableField.setAccessible(true);
       Object[] table = (Object[]) tableField.get(m.tttMap);
     
-  //    for (Object o : table)
-    //	  System.out.println(o);
+  
       
       System.out.println(m.printResults(table));
       

@@ -231,7 +231,7 @@ public class TicTacToeHashCode extends Board {
 				board.setWinnerLabel(board.isWin());
 				board.setHashCodeLabel(board.myHashCode());
 				System.out.println(board.getBoardString() + " " + board.myHashCode() + " " + board.isWin());
-		//		Thread.sleep(2000);
+				Thread.sleep(4000);
 			   }
 		   } catch (IOException e) {
 			e.printStackTrace();
